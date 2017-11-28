@@ -50,3 +50,16 @@ function ApplyPnPTemplate {
 
     Apply-PnPProvisioningTemplate -Path $templatePath
 }
+
+function GetWebPart {
+    Param(
+        [string]$webPartID
+        [string]$sourceUrl
+        [string]$siteUrl
+        [string]$zoneId
+    )
+
+    $webPartXML = Get-PnPWebPartXml -ServerRelativePageUrl $sourceUrl -Identity $webPartID  
+
+    Add-SPOWebPartToWebPartPage -ServerRelativePageUrl $siteUrl -Xml $webPartXML -ZoneId $zoneId -ZoneIndex 0  
+}
